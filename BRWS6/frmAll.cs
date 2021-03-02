@@ -86,7 +86,7 @@ namespace BRWS6
         private void ColourGrid()
         {
 
-            rtbProgress.AppendText("Set row colours started ..." + Environment.NewLine);
+            rtbProgress.AppendText("Started setting row colours..." + Environment.NewLine);
             foreach (DataGridViewRow dgr in dgvTestResults.Rows)
             {
                 if (dgr.Cells[2].Value.ToString() == "Success")
@@ -99,7 +99,7 @@ namespace BRWS6
                     dgr.DefaultCellStyle.BackColor = Color.LightPink;
                 }
             }
-            rtbProgress.AppendText("Set row colours complete" + Environment.NewLine);
+            rtbProgress.AppendText("Completed setting row colours" + Environment.NewLine);
         }
     }
 }

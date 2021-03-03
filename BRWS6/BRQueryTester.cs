@@ -65,7 +65,7 @@ namespace BRWS6
             }
         }
 
-        public TestOutcome CreateQuery(string queryName)
+        public TestOutcome CreateQuery(string referenceName)
         {
             TestOutcome outcome = new TestOutcome();
             outcome.moduleName = "Queries";
@@ -73,15 +73,19 @@ namespace BRWS6
             try
             {
                 QueriesApi queriesApi = new QueriesApi(_url);
-                QueryTemplateArray templates = queriesApi.QueriesTemplates(_session.SessionId, "ResultTask");
+                QueryTemplateArray templates = queriesApi.QueriesTemplates(_session.SessionId, "QueueItem");
                 foreach (QueryTemplate template in templates)
                 {
                     Console.WriteLine(template.Title);
                 }
                 QueryTemplate a_template = templates[0];
-                Console.WriteLine(a_template.InternalRef);
 
-                Query query = queriesApi.QueriesBuild(_session.SessionId, a_template.InternalRef);
+                Dictionary<string, string> options = new Dictionary<string, string>();
+                options["reference"] = referenceName;
+                options["properties"] = "";
+
+                Query query = queriesApi.QueriesBuild(_session.SessionId, a_template.InternalRef, new QueryArguments(options));
+                Console.WriteLine(query.Id);
                 outcome.outcome = "Success";
                 return outcome;
             }
@@ -102,7 +106,7 @@ namespace BRWS6
             outcomes.Add(queryByTemplate);
             TestOutcome queryByFilter = GetQueriesByFilter("task");
             outcomes.Add(queryByFilter);
-            TestOutcome queryCreate = CreateQuery("task");
+            TestOutcome queryCreate = CreateQuery("services/service_a");
             outcomes.Add(queryCreate);
             SessionOperations.RefreshSession(_url, _session.SessionId);
 

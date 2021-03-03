@@ -37,6 +37,7 @@ namespace BRWS6
             RunOutlineParamTests();
             RunProcessTests();
             RunQueryTests();
+            RunTaskTests();
             //Colour the grid at the end
             ColourGrid();
             Cursor.Current = Cursors.Default;
@@ -55,7 +56,6 @@ namespace BRWS6
             PopulateOutcomes(catOutcomes);
             rtbProgress.AppendText("Completed Catalog Tests" + Environment.NewLine);
             ForceRefresh();
-            //test next thing
         }
         private void RunFolderTests()
         {
@@ -68,7 +68,6 @@ namespace BRWS6
             PopulateOutcomes(folOutcomes);
             rtbProgress.AppendText("Completed Folder Tests" + Environment.NewLine);
             ForceRefresh();
-            //test next thing
         }
 
         private void RunMethodTests()
@@ -82,7 +81,6 @@ namespace BRWS6
             PopulateOutcomes(metOutcomes);
             rtbProgress.AppendText("Completed Method Tests" + Environment.NewLine);
             ForceRefresh();
-            //test next thing
         }
 
         private void RunOutlineTests()
@@ -96,7 +94,6 @@ namespace BRWS6
             PopulateOutcomes(outlineOutcomes);
             rtbProgress.AppendText("Completed Outline Tests" + Environment.NewLine);
             ForceRefresh();
-            //test next thing
         }
 
         private void RunOutlineParamTests()
@@ -110,7 +107,6 @@ namespace BRWS6
             PopulateOutcomes(paramOutcomes);
             rtbProgress.AppendText("Completed Outline Parameter Tests" + Environment.NewLine);
             ForceRefresh();
-            //test next thing
         }
 
         private void RunProcessTests()
@@ -124,7 +120,6 @@ namespace BRWS6
             PopulateOutcomes(procOutcomes);
             rtbProgress.AppendText("Completed Process Tests" + Environment.NewLine);
             ForceRefresh();
-            //test next thing
         }
 
         private void RunQueryTests()
@@ -138,7 +133,19 @@ namespace BRWS6
             PopulateOutcomes(queryOutcomes);
             rtbProgress.AppendText("Completed Query Tests" + Environment.NewLine);
             ForceRefresh();
-            //test next thing
+        }
+
+        private void RunTaskTests()
+        {
+
+            //test module -- catalog
+            rtbProgress.AppendText("Started Task Tests ..." + Environment.NewLine);
+            ForceRefresh();
+            BRTaskTester taskTest = new BRTaskTester(_session, _url);
+            List<TestOutcome> taskOutcomes = taskTest.TestAll();
+            PopulateOutcomes(taskOutcomes);
+            rtbProgress.AppendText("Completed Task Tests" + Environment.NewLine);
+            ForceRefresh();
         }
 
         private void ForceRefresh()

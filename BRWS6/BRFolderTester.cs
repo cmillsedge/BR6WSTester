@@ -75,7 +75,7 @@ namespace BRWS6
             try
             {
                 FoldersApi foldersApi = new FoldersApi(_url);
-                FolderArray folders = foldersApi.FolderSearch(_session.SessionId, "", true, 100, SimpleFilter("_", "contains", "method"));
+                FolderArray folders = foldersApi.FolderSearch(_session.SessionId, "", true, 100, FilterGenerator.SimpleFilter("_", "contains", "method"));
                 foreach (Folder folder in folders)
                 {
                     Console.WriteLine(folder.Name);
@@ -90,19 +90,12 @@ namespace BRWS6
             }
         }
 
-        private FilterArray SimpleFilter(string field, string op, string val)
-        {
-            Filter filter = new Filter(field, op, new List<string>() { val });
-            FilterArray filters = new FilterArray { filter };
-            return filters;
-        }
-
         public TestOutcome CreateFolder(string path)
         {
             TestOutcome outcome = new TestOutcome();
             outcome.moduleName = "Folders";
             outcome.methodName = "FolderCreate";
-            string folderName = "folder_new" + System.DateTime.Now.ToString("g", CultureInfo.CreateSpecificCulture("en-US")).Replace('/', '-').Replace(':', '_');
+            string folderName = "folder_new" + System.DateTime.Now.ToString("G", CultureInfo.CreateSpecificCulture("en-US")).Replace('/', '-').Replace(':', '_');
             try
             {
                 FoldersApi foldersApi = new FoldersApi(_url);

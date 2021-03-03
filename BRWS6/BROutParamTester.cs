@@ -19,12 +19,6 @@ namespace BRWS6
             _url = url;
         }
 
-        private FilterArray SimpleFilter(string field, string op, string val)
-        {
-            Filter filter = new Filter(field, op, new List<string>() { val });
-            FilterArray filters = new FilterArray { filter };
-            return filters;
-        }
 
         public TestOutcome SearchParameters()
         {
@@ -34,7 +28,7 @@ namespace BRWS6
             try
             {
                 OutlineParametersApi outlineParametersApi = new OutlineParametersApi(_url);
-                OutlineParameterArray outlineParameters = outlineParametersApi.OutlineParameterSearch(_session.SessionId, "main", SimpleFilter("name", "like", "c%"), 100);
+                OutlineParameterArray outlineParameters = outlineParametersApi.OutlineParameterSearch(_session.SessionId, "main", FilterGenerator.SimpleFilter("name", "like", "c%"), 100);
                 foreach (OutlineParameter op in outlineParameters)
                 {
                     Console.WriteLine(op.Name);
@@ -102,8 +96,9 @@ namespace BRWS6
                 OutlineParametersApi outlineParametersApi = new OutlineParametersApi(_url);
                 OutlineParameter op = ParameterGenerator.GetOneSimpleParameter(_url, _session.SessionId);
                 outlineParametersApi.OutlineParameterCreate(_session.SessionId, "main", op);
-                outlineParametersApi.OutlineParameterDestroy(_session.SessionId, op.Id);
-                Console.WriteLine(op.Id);
+                OutlineParameter op2 = outlineParametersApi.OutlineParameterFind(_session.SessionId, "main/" + op.Name);
+                Console.WriteLine(op2.Id);
+                outlineParametersApi.OutlineParameterDestroy(_session.SessionId, op2.Id);
                 outcome.outcome = "Success";
                 return outcome;
             }

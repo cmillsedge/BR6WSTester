@@ -35,6 +35,8 @@ namespace BRWS6
             RunMethodTests();
             RunOutlineTests();
             RunOutlineParamTests();
+            RunProcessTests();
+            RunQueryTests();
             //Colour the grid at the end
             ColourGrid();
             Cursor.Current = Cursors.Default;
@@ -107,6 +109,34 @@ namespace BRWS6
             List<TestOutcome> paramOutcomes = paramTest.TestAll();
             PopulateOutcomes(paramOutcomes);
             rtbProgress.AppendText("Completed Outline Parameter Tests" + Environment.NewLine);
+            ForceRefresh();
+            //test next thing
+        }
+
+        private void RunProcessTests()
+        {
+
+            //test module -- catalog
+            rtbProgress.AppendText("Started Process Tests ..." + Environment.NewLine);
+            ForceRefresh();
+            BRProcessTester procTest = new BRProcessTester(_session, _url);
+            List<TestOutcome> procOutcomes = procTest.TestAll();
+            PopulateOutcomes(procOutcomes);
+            rtbProgress.AppendText("Completed Process Tests" + Environment.NewLine);
+            ForceRefresh();
+            //test next thing
+        }
+
+        private void RunQueryTests()
+        {
+
+            //test module -- catalog
+            rtbProgress.AppendText("Started Query Tests ..." + Environment.NewLine);
+            ForceRefresh();
+            BRQueryTester queryTest = new BRQueryTester(_session, _url);
+            List<TestOutcome> queryOutcomes = queryTest.TestAll();
+            PopulateOutcomes(queryOutcomes);
+            rtbProgress.AppendText("Completed Query Tests" + Environment.NewLine);
             ForceRefresh();
             //test next thing
         }

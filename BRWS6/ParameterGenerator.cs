@@ -17,11 +17,12 @@ namespace BRWS6
             CatalogueApi catalogueApi = new CatalogueApi(url);
             ParameterTypeAliasArray aliases = catalogueApi.CatalogueParameters(sessionid);
             ParameterTypeAlias palias = aliases[0];
+            Guid g = Guid.NewGuid();
             //orderNum: 31, productName: "Red Mug", sellerName: "Gift Shop"
             OutlineParameter outlineParameter = new OutlineParameter(Id: null, 
-                                                                     Name: "amount" + System.DateTime.Now.ToString("g", CultureInfo.CreateSpecificCulture("en-US")).Replace('/', '_').Replace(':', '_').Replace(' ', '_'), 
+                                                                     Name: "amount" + g.ToString().Replace('-','_'), 
                                                                      Path: null, 
-                                                                     Description: "amount" + System.DateTime.Now.ToString("g", CultureInfo.CreateSpecificCulture("en-US")).Replace('/', '_').Replace(':', '_').Replace(' ', '_'), 
+                                                                     Description: "amount" + g.ToString().Replace('-', '_'), 
                                                                      ParameterTypeName: palias.ParameterTypeName, 
                                                                      ParameterRoleName: palias.ParameterRoleName, 
                                                                      DataTypeName: palias.DataTypeName, 
@@ -31,6 +32,33 @@ namespace BRWS6
 
             return outlineParameter;
     
+        }
+
+        public static ProcessParameterArray GetSomeProcessParams(string url, string sessionid)
+        {
+            Guid g = Guid.NewGuid();
+            string suffix = g.ToString().Replace('-', '_');
+            ProcessParameterArray parameters = new ProcessParameterArray();
+            ProcessParameter param1 = new ProcessParameter(
+                                                            Name: "Batch" + suffix,
+                                                            Description: "a description",
+                                                            ContextLabel: "top",
+                                                            OutlineParameterName: "batch",
+                                                            DisplayUnit: null,
+                                                            Mandatory: true
+                                                          );
+            ProcessParameter param2 = new ProcessParameter(
+                                                            Name: "Conc" + suffix,
+                                                            Description: "a description",
+                                                            ContextLabel: "top",
+                                                            OutlineParameterName: "conc",
+                                                            DisplayUnit: null,
+                                                            Mandatory: true
+                                                          );
+            parameters.Add(param1);
+            parameters.Add(param2);
+            return parameters;
+
         }
     }
 }

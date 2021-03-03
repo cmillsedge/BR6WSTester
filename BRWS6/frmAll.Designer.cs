@@ -131,7 +131,7 @@ namespace BRWS6
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmAll";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Rall All Tests";
+            this.Text = "Run All Tests";
             ((System.ComponentModel.ISupportInitialize)(this.dgvTestResults)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

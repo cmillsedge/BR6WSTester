@@ -96,7 +96,7 @@ namespace BRWS6
         {
             TestOutcome outcome = new TestOutcome();
             outcome.moduleName = "OutlineParameters";
-            outcome.methodName = "OutlineParameterCreate";
+            outcome.methodName = "OutlineParameterDestroy";
             try
             {
                 OutlineParametersApi outlineParametersApi = new OutlineParametersApi(_url);

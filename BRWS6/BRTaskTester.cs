@@ -19,18 +19,18 @@ namespace BRWS6
             _url = url;
         }
 
-        public TestOutcome GetLookupValues()
+        public TestOutcome GetAllTasksForFolder(string folder)
         {
             TestOutcome outcome = new TestOutcome();
-            outcome.moduleName = "Catalog";
-            outcome.methodName = "DataValues";
+            outcome.moduleName = "Task";
+            outcome.methodName = "TaskList";
             try
             {
-                CatalogueApi catalogueApi = new CatalogueApi(_url);
-                NamedArray dataElements = catalogueApi.DataValues(_session.SessionId, "/Root/Internal/User/User", "", 100, 0);
-                foreach (Named dataElement in dataElements)
+                TasksApi tasksApi = new TasksApi(_url);
+                FolderArray tasks = tasksApi.TaskList(_session.SessionId, folder);
+                foreach (Folder task in tasks)
                 {
-                    Console.WriteLine(dataElement.Name);
+                    Console.WriteLine(task.Name);
                 }
                 outcome.outcome = "Success";
                 return outcome;
@@ -48,8 +48,8 @@ namespace BRWS6
 
             SessionOperations.RefreshSession(_url, _session.SessionId);
             //run all methods
-            TestOutcome values = GetLookupValues();
-            outcomes.Add(values);
+            TestOutcome allTasks = GetAllTasksForFolder("all");
+            outcomes.Add(allTasks);
             SessionOperations.RefreshSession(_url, _session.SessionId);
 
             //return all the outcomes

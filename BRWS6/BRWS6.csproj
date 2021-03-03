@@ -58,6 +58,7 @@
     <Compile Include="BROutParamTester.cs" />
     <Compile Include="BRProcessTester.cs" />
     <Compile Include="BRQueryTester.cs" />
+    <Compile Include="BRTaskTester.cs" />
     <Compile Include="FilterGenerator.cs" />
     <Compile Include="frmAll.cs">
       <SubType>Form</SubType>
@@ -87,6 +88,7 @@
     <Compile Include="ProcessGenerator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SessionOperations.cs" />
     <Compile Include="TestOutcome.cs" />
     <EmbeddedResource Include="frmAll.resx">
       <DependentUpon>frmAll.cs</DependentUpon>

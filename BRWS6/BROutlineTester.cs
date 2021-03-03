@@ -63,25 +63,19 @@ namespace BRWS6
         }
 
 
-        private void RefreshSession()
-        {
-            //if the tests take a long time to run we want to avoid a timeout. This method will do that
-            SessionsApi s = new SessionsApi(_url);
-            s.Refresh(_session.SessionId);
-        }
 
         public List<TestOutcome> TestAll()
         {
             List<TestOutcome> outcomes = new List<TestOutcome>();
 
-            RefreshSession();
+            SessionOperations.RefreshSession(_url, _session.SessionId);
             //run all methods
             TestOutcome oneOutline = GetAnOutline("services");
             outcomes.Add(oneOutline);
             TestOutcome allOutlines = GetAllOutlines();
             outcomes.Add(allOutlines);
 
-            RefreshSession();
+            SessionOperations.RefreshSession(_url, _session.SessionId);
 
             //return all the outcomes
             return outcomes;

@@ -72,7 +72,7 @@ namespace BRWS6
             this.txtURL.Name = "txtURL";
             this.txtURL.Size = new System.Drawing.Size(296, 20);
             this.txtURL.TabIndex = 3;
-            this.txtURL.Text = "http://qa-biorails60.alces.co.uk/";
+            this.txtURL.Text = "http://192.168.0.38/";
             // 
             // txtUser
             // 

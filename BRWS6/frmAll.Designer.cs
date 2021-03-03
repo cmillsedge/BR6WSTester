@@ -38,6 +38,7 @@ namespace BRWS6
             this.rtbProgress = new System.Windows.Forms.RichTextBox();
             this.lblResults = new System.Windows.Forms.Label();
             this.lblProgress = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTestResults)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +59,7 @@ namespace BRWS6
             this.ModuleName,
             this.MethodName,
             this.Outcome});
-            this.dgvTestResults.Location = new System.Drawing.Point(13, 60);
+            this.dgvTestResults.Location = new System.Drawing.Point(13, 85);
             this.dgvTestResults.Name = "dgvTestResults";
             this.dgvTestResults.Size = new System.Drawing.Size(839, 462);
             this.dgvTestResults.TabIndex = 1;
@@ -82,7 +83,7 @@ namespace BRWS6
             // 
             // rtbProgress
             // 
-            this.rtbProgress.Location = new System.Drawing.Point(858, 60);
+            this.rtbProgress.Location = new System.Drawing.Point(858, 85);
             this.rtbProgress.Name = "rtbProgress";
             this.rtbProgress.Size = new System.Drawing.Size(265, 462);
             this.rtbProgress.TabIndex = 2;
@@ -91,7 +92,7 @@ namespace BRWS6
             // lblResults
             // 
             this.lblResults.AutoSize = true;
-            this.lblResults.Location = new System.Drawing.Point(12, 44);
+            this.lblResults.Location = new System.Drawing.Point(12, 69);
             this.lblResults.Name = "lblResults";
             this.lblResults.Size = new System.Drawing.Size(66, 13);
             this.lblResults.TabIndex = 3;
@@ -100,17 +101,28 @@ namespace BRWS6
             // lblProgress
             // 
             this.lblProgress.AutoSize = true;
-            this.lblProgress.Location = new System.Drawing.Point(855, 44);
+            this.lblProgress.Location = new System.Drawing.Point(855, 69);
             this.lblProgress.Name = "lblProgress";
             this.lblProgress.Size = new System.Drawing.Size(72, 13);
             this.lblProgress.TabIndex = 4;
             this.lblProgress.Text = "Test Progress";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Enabled = false;
+            this.richTextBox1.Location = new System.Drawing.Point(105, 13);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(747, 43);
+            this.richTextBox1.TabIndex = 5;
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
+            // 
             // frmAll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1135, 536);
+            this.ClientSize = new System.Drawing.Size(1135, 564);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.lblResults);
             this.Controls.Add(this.rtbProgress);
@@ -119,7 +131,7 @@ namespace BRWS6
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmAll";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Run It All";
+            this.Text = "Rall All Tests";
             ((System.ComponentModel.ISupportInitialize)(this.dgvTestResults)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -136,5 +148,6 @@ namespace BRWS6
         private System.Windows.Forms.RichTextBox rtbProgress;
         private System.Windows.Forms.Label lblResults;
         private System.Windows.Forms.Label lblProgress;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

@@ -54,7 +54,7 @@ namespace BRWS6
             outcome.methodName = "FolderFind";
             try
             {
-                FoldersApi foldersApi = new FoldersApi();
+                FoldersApi foldersApi = new FoldersApi(_url);
                 Folder folder = foldersApi.FolderFind(_session.SessionId, path);
                 Console.WriteLine(folder.Description);
                 outcome.outcome = "Success";
@@ -119,6 +119,28 @@ namespace BRWS6
             }
         }
 
+        public TestOutcome UpdateFolder(string path)
+        {
+            TestOutcome outcome = new TestOutcome();
+            outcome.moduleName = "Folders";
+            outcome.methodName = "FolderUpdate";
+            try
+            {
+                FoldersApi foldersApi = new FoldersApi(_url);
+                Folder folder = foldersApi.FolderFind(_session.SessionId, path);
+                folder.Description = "this is a new description";
+                Folder upFolder = foldersApi.FolderUpdate(_session.SessionId, folder.Id, folder);
+                Console.WriteLine(upFolder.Description);
+                outcome.outcome = "Success";
+                return outcome;
+            }
+            catch (Exception ex)
+            {
+                outcome.outcome = ex.Message;
+                return outcome;
+            }
+        }
+
         public TestOutcome CreateNote(string path)
         {
             TestOutcome outcome = new TestOutcome();
@@ -156,8 +178,10 @@ namespace BRWS6
                 FoldersApi foldersApi = new FoldersApi(_url);
                 //string systempath = Environment.CurrentDirectory;
                 string systempath = Application.StartupPath;
-                FileStream fp = File.Open(systempath + "\\world.jpg", FileMode.Open);
-                foldersApi.FolderFile(_session.SessionId, path, fp, imageName, null);
+                using (FileStream fs = new FileStream(systempath + "\\world.jpg", FileMode.Open))
+                {
+                    foldersApi.FolderFile(_session.SessionId, path, fs, imageName);
+                }
                 outcome.outcome = "Success";
                 return outcome;
             }
@@ -177,8 +201,11 @@ namespace BRWS6
             {
                 FoldersApi foldersApi = new FoldersApi(_url);
                 string fileName = path + @"/" + "file";
+                string localfilename = "World-" + System.DateTime.Now.ToString("G", CultureInfo.CreateSpecificCulture("en-US")).Replace('/', '-').Replace(':', '_').Replace(' ', '_') + ".png";
+                localfilename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), localfilename);
                 Stream downloadedFile = foldersApi.FolderDownload(_session.SessionId, fileName);
-                using (FileStream localFile = File.Create(fileName))
+                using (FileStream localFile = File.Create(localfilename))
+                    
                 {
                     downloadedFile.CopyTo(localFile);
                 }
@@ -207,18 +234,21 @@ namespace BRWS6
             //run all methods
             TestOutcome foldersUnder = GetFoldersUnder("services");
             outcomes.Add(foldersUnder);
-            TestOutcome folderByPath = GetFolderByPath("all");
+            TestOutcome folderByPath = GetFolderByPath("biology");
             outcomes.Add(folderByPath);
             TestOutcome folderSearch = GetFolderBySearch();
             outcomes.Add(folderSearch);
             TestOutcome folderCreate = CreateFolder("services");
             outcomes.Add(folderCreate);
+            TestOutcome folderUpdate = UpdateFolder("biology");
+            outcomes.Add(folderUpdate);
             TestOutcome noteCreate = CreateNote("support");
             outcomes.Add(noteCreate);
-            //TestOutcome fileCreate = CreateFile("support");
-            //outcomes.Add(fileCreate);
             TestOutcome fileGet = GetFile("project");
             outcomes.Add(fileGet);
+            TestOutcome fileCreate = CreateFile("all");
+            outcomes.Add(fileCreate);
+            
 
             RefreshSession();
 

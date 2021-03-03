@@ -32,6 +32,9 @@ namespace BRWS6
             //Run tests 
             RunCatalogTests();
             RunFolderTests();
+            RunMethodTests();
+            RunOutlineTests();
+            RunOutlineParamTests();
             //Colour the grid at the end
             ColourGrid();
             Cursor.Current = Cursors.Default;
@@ -44,6 +47,7 @@ namespace BRWS6
 
             //test module -- catalog
             rtbProgress.AppendText("Started Catalog Tests ..." + Environment.NewLine);
+            ForceRefresh();
             BRCatalogTester catTest = new BRCatalogTester(_session, _url);
             List<TestOutcome> catOutcomes = catTest.TestAll();
             PopulateOutcomes(catOutcomes);
@@ -56,10 +60,53 @@ namespace BRWS6
 
             //test module -- folders
             rtbProgress.AppendText("Started Folder Tests ..." + Environment.NewLine);
+            ForceRefresh();
             BRFolderTester folTest = new BRFolderTester(_session, _url);
             List<TestOutcome> folOutcomes = folTest.TestAll();
             PopulateOutcomes(folOutcomes);
             rtbProgress.AppendText("Completed Folder Tests" + Environment.NewLine);
+            ForceRefresh();
+            //test next thing
+        }
+
+        private void RunMethodTests()
+        {
+
+            //test module -- catalog
+            rtbProgress.AppendText("Started Method Tests ..." + Environment.NewLine);
+            ForceRefresh();
+            BRMethodTester metTest = new BRMethodTester(_session, _url);
+            List<TestOutcome> metOutcomes = metTest.TestAll();
+            PopulateOutcomes(metOutcomes);
+            rtbProgress.AppendText("Completed Method Tests" + Environment.NewLine);
+            ForceRefresh();
+            //test next thing
+        }
+
+        private void RunOutlineTests()
+        {
+
+            //test module -- catalog
+            rtbProgress.AppendText("Started Outline Tests ..." + Environment.NewLine);
+            ForceRefresh();
+            BROutlineTester outlineTest = new BROutlineTester(_session, _url);
+            List<TestOutcome> outlineOutcomes = outlineTest.TestAll();
+            PopulateOutcomes(outlineOutcomes);
+            rtbProgress.AppendText("Completed Outline Tests" + Environment.NewLine);
+            ForceRefresh();
+            //test next thing
+        }
+
+        private void RunOutlineParamTests()
+        {
+
+            //test module -- catalog
+            rtbProgress.AppendText("Started Outline Parameter Tests ..." + Environment.NewLine);
+            ForceRefresh();
+            BROutParamTester paramTest = new BROutParamTester(_session, _url);
+            List<TestOutcome> paramOutcomes = paramTest.TestAll();
+            PopulateOutcomes(paramOutcomes);
+            rtbProgress.AppendText("Completed Outline Parameter Tests" + Environment.NewLine);
             ForceRefresh();
             //test next thing
         }

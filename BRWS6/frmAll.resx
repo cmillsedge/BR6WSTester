@@ -126,6 +126,9 @@
   <metadata name="Outcome.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>This is a simple test harness which calls all of the methods in the API. It uses the test database builder data for all data retrieval. Any new objects created will be given a date suffix to allow multiple executions. Wherever possible tests are completely independent of any previous test, meaning if a test fails then it is not due to a previous test failure.</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

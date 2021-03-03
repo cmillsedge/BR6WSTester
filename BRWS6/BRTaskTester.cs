@@ -42,6 +42,26 @@ namespace BRWS6
             }
         }
 
+        public TestOutcome GetTaskById(int taskid)
+        {
+            TestOutcome outcome = new TestOutcome();
+            outcome.moduleName = "Task";
+            outcome.methodName = "TaskGet";
+            try
+            {
+                TasksApi tasksApi = new TasksApi(_url);
+                IO.Swagger.Model.Task task = tasksApi.TaskGet(_session.SessionId, taskid.ToString());
+                Console.WriteLine(task.ProcessPath);
+                outcome.outcome = "Success";
+                return outcome;
+            }
+            catch (Exception ex)
+            {
+                outcome.outcome = ex.Message;
+                return outcome;
+            }
+        }
+
         public List<TestOutcome> TestAll()
         {
             List<TestOutcome> outcomes = new List<TestOutcome>();
@@ -50,6 +70,11 @@ namespace BRWS6
             //run all methods
             TestOutcome allTasks = GetAllTasksForFolder("all");
             outcomes.Add(allTasks);
+            //!CMills change this before sending to tester
+            //TestOutcome idTasks = GetTaskById(10066);
+            TestOutcome idTasks = GetTaskById(6709999);
+            outcomes.Add(idTasks);
+            
             SessionOperations.RefreshSession(_url, _session.SessionId);
 
             //return all the outcomes

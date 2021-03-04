@@ -23,7 +23,6 @@ C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\bin\Debug\BRWS6.exe
 C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\bin\Debug\BRWS6.pdb
 C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\bin\Debug\IO.Swagger.dll
 C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\bin\Debug\Newtonsoft.Json.dll
-C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Debug\BRWS6.csprojAssemblyReference.cache
 C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Debug\BRWS6.frmAll.resources
 C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Debug\BRWS6.frmCatalog.resources
 C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Debug\BRWS6.frmLogin.resources
@@ -35,3 +34,4 @@ C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Debug\BRWS6.csproj.Cop
 C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Debug\BRWS6.exe
 C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Debug\BRWS6.pdb
 C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\bin\Debug\RestSharp.dll
+C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Debug\BRWS6.csprojAssemblyReference.cache

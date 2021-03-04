@@ -62,6 +62,168 @@ namespace BRWS6
             }
         }
 
+        public TestOutcome GetTaskByPath(string path)
+        {
+            TestOutcome outcome = new TestOutcome();
+            outcome.moduleName = "Task";
+            outcome.methodName = "TaskFind";
+            try
+            {
+                TasksApi tasksApi = new TasksApi(_url);
+                IO.Swagger.Model.Task task = tasksApi.TaskFind(_session.SessionId, path);
+                Console.WriteLine(task.ProcessPath);
+                outcome.outcome = "Success";
+                return outcome;
+            }
+            catch (Exception ex)
+            {
+                outcome.outcome = ex.Message;
+                return outcome;
+            }
+        }
+
+        public TestOutcome GetTaskNoRows(string path)
+        {
+            TestOutcome outcome = new TestOutcome();
+            outcome.moduleName = "Task";
+            outcome.methodName = "TaskFind(norows)";
+            try
+            {
+                TasksApi tasksApi = new TasksApi(_url);
+                IO.Swagger.Model.Task task = tasksApi.TaskFind(_session.SessionId, path, true);
+                Console.WriteLine(task.ProcessPath);
+                outcome.outcome = "Success";
+                return outcome;
+            }
+            catch (Exception ex)
+            {
+                outcome.outcome = ex.Message;
+                return outcome;
+            }
+        }
+
+        public TestOutcome SearchForTasks(string filterstring)
+        {
+            TestOutcome outcome = new TestOutcome();
+            outcome.moduleName = "Task";
+            outcome.methodName = "TaskSearch";
+            try
+            {
+                TasksApi tasksApi = new TasksApi(_url);
+                FolderArray tasks = tasksApi.TaskSearch(_session.SessionId, "", true, 100, FilterGenerator.SimpleFilter("tasks.name", "like", filterstring + "%"));
+                foreach (Folder task in tasks)
+                {
+                    Console.WriteLine(task.Name);
+                }
+                outcome.outcome = "Success";
+                return outcome;
+            }
+            catch (Exception ex)
+            {
+                outcome.outcome = ex.Message;
+                return outcome;
+            }
+        }
+
+        public TestOutcome CreateFlatTask()
+        {
+            TestOutcome outcome = new TestOutcome();
+            outcome.moduleName = "Task";
+            outcome.methodName = "TaskCreate(Flat)";
+            try
+            {
+                TasksApi tasksApi = new TasksApi(_url);
+                IO.Swagger.Model.Task task = TaskGenerator.GetFlatTask();
+                JobReport job = tasksApi.TaskCreate(_session.SessionId, "all", task);
+                JobReport polledJob = JobHandler.pollJob(job, _session.SessionId, _url);
+
+                if (polledJob.ErrorMessage != null)
+                { outcome.outcome = polledJob.ErrorMessage; }
+                else
+                { outcome.outcome = "Success"; }
+                return outcome;
+            }
+            catch (Exception ex)
+            {
+                outcome.outcome = ex.Message;
+                return outcome;
+            }
+        }
+
+        public TestOutcome CreateHierarchicalTask()
+        {
+            TestOutcome outcome = new TestOutcome();
+            outcome.moduleName = "Task";
+            outcome.methodName = "TaskCreate(Hierarchical)";
+            try
+            {
+                TasksApi tasksApi = new TasksApi(_url);
+                IO.Swagger.Model.Task task = TaskGenerator.GetHierarchicalTask();
+                JobReport job = tasksApi.TaskCreate(_session.SessionId, "all", task);
+                JobReport polledJob = JobHandler.pollJob(job, _session.SessionId, _url);
+
+                if (polledJob.ErrorMessage != null)
+                { outcome.outcome = polledJob.ErrorMessage; }
+                else
+                { outcome.outcome = "Success"; }
+                return outcome;
+            }
+            catch (Exception ex)
+            {
+                outcome.outcome = ex.Message;
+                return outcome;
+            }
+        }
+
+        public TestOutcome UpdateTask(string path)
+        {
+            TestOutcome outcome = new TestOutcome();
+            outcome.moduleName = "Task";
+            outcome.methodName = "TaskEdit";
+            try
+            {
+                TasksApi tasksApi = new TasksApi(_url);
+                IO.Swagger.Model.Task task = tasksApi.TaskFind(_session.SessionId, path);
+                task.Rows[0].Values["conc"] = "55";
+                JobReport job = tasksApi.TaskEdit(_session.SessionId, path, task);
+                JobReport polledJob = JobHandler.pollJob(job, _session.SessionId, _url);
+
+                if (polledJob.ErrorMessage != null)
+                { outcome.outcome = polledJob.ErrorMessage; }
+                else
+                { outcome.outcome = "Success"; }
+                return outcome;
+            }
+            catch (Exception ex)
+            {
+                outcome.outcome = ex.Message;
+                return outcome;
+            }
+        }
+
+        public TestOutcome DestroyTask(string filterstring)
+        {
+            TestOutcome outcome = new TestOutcome();
+            outcome.moduleName = "Task";
+            outcome.methodName = "TaskDestroy";
+            try
+            {
+                TasksApi tasksApi = new TasksApi(_url);
+                IO.Swagger.Model.Task task = TaskGenerator.GetFlatTask();
+                JobReport job = tasksApi.TaskCreate(_session.SessionId, "all", task);
+                JobReport polledJob = JobHandler.pollJob(job, _session.SessionId, _url);
+                FolderArray tasks = tasksApi.TaskSearch(_session.SessionId, "", true, 100, FilterGenerator.SimpleFilter("tasks.name", "like", filterstring + "%"));
+                tasksApi.TaskDestroy(_session.SessionId, tasks[0].ReferenceId);
+                outcome.outcome = "Success";
+                return outcome;
+            }
+            catch (Exception ex)
+            {
+                outcome.outcome = ex.Message;
+                return outcome;
+            }
+        }
+
         public List<TestOutcome> TestAll()
         {
             List<TestOutcome> outcomes = new List<TestOutcome>();
@@ -70,11 +232,23 @@ namespace BRWS6
             //run all methods
             TestOutcome allTasks = GetAllTasksForFolder("all");
             outcomes.Add(allTasks);
-            //!CMills change this before sending to tester
-            //TestOutcome idTasks = GetTaskById(10066);
-            TestOutcome idTasks = GetTaskById(6709999);
-            outcomes.Add(idTasks);
-            
+            TestOutcome idTask = GetTaskById(10066);
+            outcomes.Add(idTask);
+            TestOutcome pathTask = GetTaskByPath("all/task_pending");
+            outcomes.Add(pathTask);
+            TestOutcome pathTaskNoRows = GetTaskNoRows("all/task_pending");
+            outcomes.Add(pathTaskNoRows);
+            TestOutcome searchTask = SearchForTasks("t");
+            outcomes.Add(searchTask);
+            TestOutcome flatTask = CreateFlatTask();
+            outcomes.Add(flatTask);
+            TestOutcome hierTask = CreateHierarchicalTask();
+            outcomes.Add(hierTask);
+            TestOutcome updateTask = UpdateTask("all/task_pending");
+            outcomes.Add(updateTask);
+            TestOutcome delTask = DestroyTask("BRFlatTask");
+            outcomes.Add(delTask);
+
             SessionOperations.RefreshSession(_url, _session.SessionId);
 
             //return all the outcomes

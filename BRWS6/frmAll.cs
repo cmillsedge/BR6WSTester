@@ -153,12 +153,12 @@ namespace BRWS6
         {
 
             //test module -- catalog
-            rtbProgress.AppendText("Started Task Tests ..." + Environment.NewLine);
+            rtbProgress.AppendText("Started Request Tests ..." + Environment.NewLine);
             ForceRefresh();
             BRRequestTester reqTest = new BRRequestTester(_session, _url);
             List<TestOutcome> reqOutcomes = reqTest.TestAll();
             PopulateOutcomes(reqOutcomes);
-            rtbProgress.AppendText("Completed Task Tests" + Environment.NewLine);
+            rtbProgress.AppendText("Completed Request Tests" + Environment.NewLine);
             ForceRefresh();
         }
 

@@ -90,6 +90,7 @@
     <Compile Include="ProcessGenerator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestGenerator.cs" />
     <Compile Include="SessionOperations.cs" />
     <Compile Include="TaskGenerator.cs" />
     <Compile Include="TestOutcome.cs" />

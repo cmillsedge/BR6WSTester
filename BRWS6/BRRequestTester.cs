@@ -19,20 +19,91 @@ namespace BRWS6
             _url = url;
         }
 
-        public TestOutcome DestroyTask(string filterstring)
+        public TestOutcome GetRequestById(int id)
         {
             TestOutcome outcome = new TestOutcome();
-            outcome.moduleName = "Task";
-            outcome.methodName = "TaskDestroy";
+            outcome.moduleName = "Request";
+            outcome.methodName = "RequestGet";
             try
             {
-                TasksApi tasksApi = new TasksApi(_url);
-                IO.Swagger.Model.Task task = TaskGenerator.GetFlatTask();
-                JobReport job = tasksApi.TaskCreate(_session.SessionId, "all", task);
-                JobReport polledJob = JobHandler.pollJob(job, _session.SessionId, _url);
-                FolderArray tasks = tasksApi.TaskSearch(_session.SessionId, "", true, 100, FilterGenerator.SimpleFilter("tasks.name", "like", filterstring + "%"));
-                tasksApi.TaskDestroy(_session.SessionId, tasks[0].ReferenceId);
+                RequestsApi reqApi = new RequestsApi(_url);
+                Request request = reqApi.RequestGet(_session.SessionId, id.ToString());
+                foreach (QueueItem qi in request.QueueItems)
+                {
+                    Console.WriteLine(qi.Id);
+                }
                 outcome.outcome = "Success";
+                return outcome;
+            }
+            catch (Exception ex)
+            {
+                outcome.outcome = ex.Message;
+                return outcome;
+            }
+        }
+
+        public TestOutcome GetRequestByName(string name)
+        {
+            TestOutcome outcome = new TestOutcome();
+            outcome.moduleName = "Request";
+            outcome.methodName = "RequestFind";
+            try
+            {
+                RequestsApi reqApi = new RequestsApi(_url);
+                Request request = reqApi.RequestFind(_session.SessionId, name);
+                foreach (QueueItem qi in request.QueueItems)
+                {
+                    Console.WriteLine(qi.Id);
+                }
+                outcome.outcome = "Success";
+                return outcome;
+            }
+            catch (Exception ex)
+            {
+                outcome.outcome = ex.Message;
+                return outcome;
+            }
+        }
+
+        public TestOutcome SearchRequests(string filterstring)
+        {
+            TestOutcome outcome = new TestOutcome();
+            outcome.moduleName = "Request";
+            outcome.methodName = "RequestsSearch";
+            try
+            {
+                RequestsApi requestsApi = new RequestsApi(_url);
+                NamedArray requests = requestsApi.RequestsSearch(_session.SessionId, "all", FilterGenerator.SimpleFilter("name", "like", filterstring + "%"), 100);
+                foreach (Named request in requests)
+                {
+                    Console.WriteLine(request.Name);
+                }
+                outcome.outcome = "Success";
+                return outcome;
+            }
+            catch (Exception ex)
+            {
+                outcome.outcome = ex.Message;
+                return outcome;
+            }
+        }
+
+        public TestOutcome CreateRequest()
+        {
+            TestOutcome outcome = new TestOutcome();
+            outcome.moduleName = "Request";
+            outcome.methodName = "RequestCreateJob";
+            try
+            {
+                RequestsApi requestsApi = new RequestsApi(_url);
+                Request request = RequestGenerator.GetSimpleRequest();
+                JobReport job = requestsApi.RequestCreateJob(_session.SessionId, "all", request);
+
+                JobReport polledJob = JobHandler.pollJob(job, _session.SessionId, _url);
+                if (polledJob.ErrorMessage != null)
+                { outcome.outcome = polledJob.ErrorMessage; }
+                else
+                { outcome.outcome = "Success"; }
                 return outcome;
             }
             catch (Exception ex)
@@ -48,8 +119,14 @@ namespace BRWS6
 
             SessionOperations.RefreshSession(_url, _session.SessionId);
             //run all methods
-            TestOutcome delTask = DestroyTask("BRFlatTask");
-            outcomes.Add(delTask);
+            TestOutcome getRequest = GetRequestById(10002);
+            outcomes.Add(getRequest);
+            TestOutcome findRequest = GetRequestByName("powder_service_request");
+            outcomes.Add(findRequest);
+            TestOutcome searchRequest = SearchRequests("powder");
+            outcomes.Add(searchRequest);
+            TestOutcome createRequest = CreateRequest();
+            outcomes.Add(createRequest);
 
             SessionOperations.RefreshSession(_url, _session.SessionId);
 

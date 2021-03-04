@@ -58,6 +58,7 @@
     <Compile Include="BROutParamTester.cs" />
     <Compile Include="BRProcessTester.cs" />
     <Compile Include="BRQueryTester.cs" />
+    <Compile Include="BRRequestTester.cs" />
     <Compile Include="BRTaskTester.cs" />
     <Compile Include="FilterGenerator.cs" />
     <Compile Include="frmAll.cs">

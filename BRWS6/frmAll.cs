@@ -38,6 +38,7 @@ namespace BRWS6
             RunProcessTests();
             RunQueryTests();
             RunTaskTests();
+            RunRequestTests();
             //Colour the grid at the end
             ColourGrid();
             Cursor.Current = Cursors.Default;
@@ -144,6 +145,19 @@ namespace BRWS6
             BRTaskTester taskTest = new BRTaskTester(_session, _url);
             List<TestOutcome> taskOutcomes = taskTest.TestAll();
             PopulateOutcomes(taskOutcomes);
+            rtbProgress.AppendText("Completed Task Tests" + Environment.NewLine);
+            ForceRefresh();
+        }
+
+        private void RunRequestTests()
+        {
+
+            //test module -- catalog
+            rtbProgress.AppendText("Started Task Tests ..." + Environment.NewLine);
+            ForceRefresh();
+            BRRequestTester reqTest = new BRRequestTester(_session, _url);
+            List<TestOutcome> reqOutcomes = reqTest.TestAll();
+            PopulateOutcomes(reqOutcomes);
             rtbProgress.AppendText("Completed Task Tests" + Environment.NewLine);
             ForceRefresh();
         }

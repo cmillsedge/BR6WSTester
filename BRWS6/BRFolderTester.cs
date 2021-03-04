@@ -122,6 +122,8 @@ namespace BRWS6
                 FoldersApi foldersApi = new FoldersApi(_url);
                 Folder folder = foldersApi.FolderFind(_session.SessionId, path);
                 folder.Description = "this is a new description";
+                //! CMillshttps://edge-ka.atlassian.net/browse/BR4M2-693 means you have to set folder name to null may want to take this if the bug if fixed
+                folder.Name = String.Empty;
                 Folder upFolder = foldersApi.FolderUpdate(_session.SessionId, folder.Id, folder);
                 Console.WriteLine(upFolder.Description);
                 outcome.outcome = "Success";

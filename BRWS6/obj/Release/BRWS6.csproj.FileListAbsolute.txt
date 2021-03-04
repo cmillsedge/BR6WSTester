@@ -1,0 +1,16 @@
+C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\bin\Release\BRWS6.exe.config
+C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\bin\Release\BRWS6.exe
+C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\bin\Release\BRWS6.pdb
+C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\bin\Release\IO.Swagger.dll
+C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\bin\Release\Newtonsoft.Json.dll
+C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\bin\Release\RestSharp.dll
+C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Release\BRWS6.frmAll.resources
+C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Release\BRWS6.frmCatalog.resources
+C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Release\BRWS6.frmLogin.resources
+C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Release\BRWS6.frmSelect.resources
+C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Release\BRWS6.Properties.Resources.resources
+C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Release\BRWS6.csproj.GenerateResource.cache
+C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Release\BRWS6.csproj.CoreCompileInputs.cache
+C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Release\BRWS6.csproj.CopyComplete
+C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Release\BRWS6.exe
+C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Release\BRWS6.pdb

@@ -71,8 +71,8 @@ namespace BRWS6
         {
             //build rows
             Dictionary<string, string> top1 = new Dictionary<string, string>();
-            top1.Add("a", "An a type thing");
-            top1.Add("b", "A b type thing");
+            top1.Add("a", "21");
+            top1.Add("b", "22");
             Dictionary<string, string> child11 = new Dictionary<string, string>();
             child11.Add("batch", "ED10-1:1");
             child11.Add("conc", "10");
@@ -102,6 +102,7 @@ namespace BRWS6
                     null,
                     child13
             );
+            
             TaskRowArray rows = new TaskRowArray { row_top1, row_child11, row_child12, row_child13 };
             return rows;
         }

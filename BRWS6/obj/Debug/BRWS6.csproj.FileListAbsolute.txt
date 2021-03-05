@@ -24,9 +24,7 @@ C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\bin\Debug\BRWS6.pdb
 C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\bin\Debug\IO.Swagger.dll
 C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\bin\Debug\Newtonsoft.Json.dll
 C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Debug\BRWS6.frmAll.resources
-C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Debug\BRWS6.frmCatalog.resources
 C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Debug\BRWS6.frmLogin.resources
-C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Debug\BRWS6.frmSelect.resources
 C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Debug\BRWS6.Properties.Resources.resources
 C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Debug\BRWS6.csproj.GenerateResource.cache
 C:\Users\millsy\source\repos\CSharp\BR6WSTester\BRWS6\obj\Debug\BRWS6.csproj.CoreCompileInputs.cache

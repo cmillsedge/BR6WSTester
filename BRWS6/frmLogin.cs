@@ -29,12 +29,14 @@ namespace BRWS6
                 SessionsApi s = new SessionsApi(url + "/api/v6");
                 Session key = s.Login(txtUser.Text, txtPass.Text);
                 Console.WriteLine(key.SessionId);
-                using (frmSelect frmSel = new frmSelect(key, url + "/api/v6"))
+                using (frmAll frmAllTests = new frmAll(key, url + "/api/v6"))
                 {
+                    frmAllTests.Location = this.Location;
                     this.Hide();
-                    frmSel.Location = this.Location;
-                    frmSel.ShowDialog();
+                    frmAllTests.ShowDialog();
+
                 }
+                this.Show();
                 //frmSel closed re-display logon
                 this.Show();
                 this.Dispose();
